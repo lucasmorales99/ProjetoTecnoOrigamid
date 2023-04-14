@@ -3,7 +3,7 @@ const vm = new Vue({
     data: {
        produtos:[],
        produto: false,
-       carrinho: [],
+       carrinho: []
     },
     filters: {
         numeroPreco(valor){
@@ -58,7 +58,13 @@ const vm = new Vue({
             this.carrinho.splice(index, 1)
         }
     },
+    watch:{
+        carrinho(){
+            window.localStorage.carrinho = JSON.stringify(this.carrinho);
+        }
+    },
     created(){
-        this.fetchProdutos()
+        this.fetchProdutos();
+        this.checarLocalStorage();
     }
 })
